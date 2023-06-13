@@ -1,0 +1,18 @@
+<?php
+$email = $_POST['email'];
+$password = $_POST['password'];
+$email = stripcslashes($email);
+$password = stripcslashes($password);
+$con =mysqli_connect('127.0.0.1','root','');
+mysqli_select_db($con,'musicdb');
+$sql = ("select * from Student where email='$email' and password = '$password'") or die("failed to query database" . mysqli_connect_error());
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result);
+if($row['email']==$email&&$row['password']==$password){
+echo"login successful!!! welcome".$row['username'];
+header("refresh:2; url=documentation123.html");
+}
+else {
+echo "failed to login!";
+}
+?>
